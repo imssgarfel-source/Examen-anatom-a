@@ -25,7 +25,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            /* BLINDAJE ANTI-IA: Bloquea la selección y copia de texto en toda la app */
+            /* BLINDAJE ANTI-IA: Bloquea la selección y copia de texto */
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -38,9 +38,12 @@
             color: var(--text);
             line-height: 1.5;
             padding-bottom: 30px;
+            /* EVITA EL REINICIO MÓVIL: Bloquea el gesto de tirar hacia abajo para recargar */
+            overscroll-behavior-y: none;
+            touch-action: pan-x pan-y;
         }
 
-        /* Encabezado móvil ultra compacto y fluido para liberar pantalla */
+        /* Encabezado móvil ultra compacto y fluido */
         header {
             background: var(--primary);
             color: white;
@@ -134,7 +137,7 @@
             font-size: 0.95rem;
             outline: none;
             transition: border-color 0.2s;
-            /* Permite escribir en el input de nombre */
+            /* Permite escribir el nombre libremente */
             -webkit-user-select: text;
             user-select: text;
         }
@@ -614,6 +617,7 @@
             const secs = elapsed % 60;
             document.getElementById("res-time-summary").textContent = `Tiempo total empleado: ${mins} min ${secs} seg`;
 
+            1
             const fbSummary = document.getElementById("res-feedback-summary");
             if (finalScore >= 8.0) {
                 fbSummary.textContent = "¡Excelente desempeño! Demuestra un sólido dominio clínico y teórico.";
