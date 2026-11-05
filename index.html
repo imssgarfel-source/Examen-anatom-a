@@ -38,12 +38,11 @@
             color: var(--text);
             line-height: 1.5;
             padding-bottom: 30px;
-            /* EVITA EL REINICIO MÓVIL: Bloquea el gesto de tirar hacia abajo para recargar */
+            /* EVITA EL REINICIO MÓVIL: Bloquea estrictamente el gesto de tirar hacia abajo */
             overscroll-behavior-y: none;
             touch-action: pan-x pan-y;
         }
 
-        /* Encabezado móvil ultra compacto y fluido */
         header {
             background: var(--primary);
             color: white;
@@ -89,13 +88,8 @@
             gap: 3px;
         }
 
-        .stat-badge.correct-badge {
-            background: rgba(47, 133, 90, 0.4);
-        }
-
-        .stat-badge.error-badge {
-            background: rgba(197, 48, 48, 0.4);
-        }
+        .stat-badge.correct-badge { background: rgba(47, 133, 90, 0.4); }
+        .stat-badge.error-badge { background: rgba(197, 48, 48, 0.4); }
 
         .container {
             max-width: 900px;
@@ -137,13 +131,8 @@
             font-size: 0.95rem;
             outline: none;
             transition: border-color 0.2s;
-            /* Permite escribir el nombre libremente */
             -webkit-user-select: text;
             user-select: text;
-        }
-
-        .form-group input:focus, .form-group select:focus {
-            border-color: var(--primary-light);
         }
 
         .btn {
@@ -159,14 +148,8 @@
             transition: background 0.2s;
         }
 
-        .btn:hover:not(:disabled) {
-            background: var(--primary-light);
-        }
-
-        .btn:disabled {
-            background: #a0aec0;
-            cursor: not-allowed;
-        }
+        .btn:hover:not(:disabled) { background: var(--primary-light); }
+        .btn:disabled { background: #a0aec0; cursor: not-allowed; }
 
         .q-header {
             display: flex;
@@ -221,14 +204,8 @@
             gap: 8px;
         }
 
-        .option-btn:hover:not(:disabled) {
-            background: #edf2f7;
-            border-color: #cbd5e0;
-        }
-
-        .option-btn:disabled {
-            cursor: default;
-        }
+        .option-btn:hover:not(:disabled) { background: #edf2f7; border-color: #cbd5e0; }
+        .option-btn:disabled { cursor: default; }
 
         .option-btn.correct {
             background: var(--success-bg) !important;
@@ -252,88 +229,27 @@
             animation: fadeIn 0.3s ease-in;
         }
 
-        .feedback-box.show {
-            display: block;
-        }
+        .feedback-box.show { display: block; }
+        .feedback-box.correct-fb { background: var(--success-bg); border-left: 4px solid var(--success); color: #22543d; }
+        .feedback-box.incorrect-fb { background: var(--error-bg); border-left: 4px solid var(--error); color: #742a2a; }
 
-        .feedback-box.correct-fb {
-            background: var(--success-bg);
-            border-left: 4px solid var(--success);
-            color: #22543d;
-        }
+        .feedback-title { font-weight: 700; margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
 
-        .feedback-box.incorrect-fb {
-            background: var(--error-bg);
-            border-left: 4px solid var(--error);
-            color: #742a2a;
-        }
-
-        .feedback-title {
-            font-weight: 700;
-            margin-bottom: 3px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .score-summary {
-            text-align: center;
-            padding: 15px 0;
-        }
-
+        .score-summary { text-align: center; padding: 15px 0; }
         .score-circle {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            width: 100px; height: 100px; border-radius: 50%;
+            background: var(--primary); color: white;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
             margin: 0 auto 12px;
         }
+        .score-val { font-size: 1.8rem; font-weight: 800; line-height: 1; }
+        .score-max { font-size: 0.75rem; opacity: 0.8; }
 
-        .score-val {
-            font-size: 1.8rem;
-            font-weight: 800;
-            line-height: 1;
-        }
-
-        .score-max {
-            font-size: 0.75rem;
-            opacity: 0.8;
-        }
-
-        .module-breakdown {
-            margin-top: 20px;
-        }
-
-        .module-item {
-            margin-bottom: 10px;
-        }
-
-        .module-info {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            margin-bottom: 3px;
-            font-weight: 600;
-        }
-
-        .progress-bar {
-            height: 6px;
-            background: #edf2f7;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--primary-light);
-            width: 0%;
-            transition: width 0.5s ease-out;
-        }
+        .module-breakdown { margin-top: 20px; }
+        .module-item { margin-bottom: 10px; }
+        .module-info { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 3px; font-weight: 600; }
+        .progress-bar { height: 6px; background: #edf2f7; border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--primary-light); width: 0%; transition: width 0.5s ease-out; }
 
         .hidden { display: none !important; }
 
@@ -397,7 +313,6 @@
                 <div class="q-text" id="q-text">Cargando pregunta...</div>
                 <div class="options-list" id="options-list"></div>
                 
-                <!-- Immediate Feedback Box -->
                 <div class="feedback-box" id="feedback-box">
                     <div class="feedback-title" id="fb-title"></div>
                     <div id="fb-text"></div>
@@ -617,7 +532,6 @@
             const secs = elapsed % 60;
             document.getElementById("res-time-summary").textContent = `Tiempo total empleado: ${mins} min ${secs} seg`;
 
-            1
             const fbSummary = document.getElementById("res-feedback-summary");
             if (finalScore >= 8.0) {
                 fbSummary.textContent = "¡Excelente desempeño! Demuestra un sólido dominio clínico y teórico.";
