@@ -20,12 +20,18 @@
             --border: #e2e8f0;
         }
 
-        * {
-            box-sizing: border-box;
+        /* BLINDAJE TÁCTIL ABSOLUTO: Frena el rebote y la recarga nativa del navegador móvil en raíz */
+        html, body {
+            width: 100%;
+            height: 100%;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
+            overscroll-behavior-y: none;
+            -webkit-overflow-scrolling: touch;
+            background-color: var(--bg);
+            color: var(--text);
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            /* BLINDAJE ANTI-IA: Bloquea la selección y copia de texto */
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -34,13 +40,8 @@
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.4;
             padding-bottom: 20px;
-            /* BLINDAJE TÁCTIL: Frena el rebote elástico y evita la recarga por deslizamiento superior */
-            overscroll-behavior-y: none;
-            touch-action: pan-x pan-y;
+            overflow-y: auto;
         }
 
         header {
@@ -234,7 +235,6 @@
 
         .feedback-title { font-weight: 700; margin-bottom: 2px; display: flex; align-items: center; gap: 4px; }
 
-        /* BARRA DE NAVEGACIÓN SUPERIOR */
         .top-nav-bar {
             display: flex;
             justify-content: space-between;
@@ -412,7 +412,7 @@
             { id: 27, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G1", text: "¿Cuáles de los siguientes huesos forman parte del esqueleto axial humano?", options: ["A) Húmero, fémur y escápula.", "B) Clavícula, radio y coxal.", "C) Cráneo, columna vertebral, esternón y costillas.", "D) Tibia, peroné y huesos del tarso."], correct: 2, fb: "El esqueleto humano se divide en esqueleto axial (compuesto por el cráneo, columna vertebral, caja torácica con esternón y costillas, que forman el eje central de protección corporal) y esqueleto apendicular (extremidades y cinturas escapular y pélvica)." },
             { id: 28, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G1", text: "¿Cuál de las siguientes características clínicas e histopatológicas define clásicamente a la osteoartritis (artrosis) en comparación con las artropatías inflamatorias?", options: ["A) Presencia de dolor mecánico que empeora con el movimiento y mejora con el reposo, asociado al desgaste del cartílago articular.", "B) Rigidez matutina generalizada superior a una hora e inflamación simétrica de pequeñas articulaciones.", "C) Presencia masiva de autoanticuerpos contra el factor reumatoide en suero.", "D) Destrucción sinovial primaria de origen autoinmune con anquilosis precoz."], correct: 0, fb: "La osteoartritis es una enfermedad degenerativa no inflamatoria primaria caracterizada por el desgaste progresivo del cartílago hialino articular, formación de osteofitos marginales y esclerosis subcondral, manifestándose típicamente con dolor de características mecánicas (empeora con la actividad y cede al reposo)." },
             { id: 29, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G1", text: "¿Qué tipo de cartílago cubre las superficies de las articulaciones móviles (diartrodias) y sirve de modelo para formar los huesos durante el desarrollo embrionario?", options: ["A) Cartílago elástico.", "B) Cartílago hialino.", "C) Fibrocartílago denso.", "D) Cartílago reticular."], correct: 1, fb: "El cartílago hialino es el más abundante del cuerpo. Forma las superficies articulares reduciendo la fricción y absorbiendo impactos, y constituye el molde cartilaginoso inicial sobre el cual se desarrolla la mayor parte del esqueleto fetal mediante osificación endocondral." },
-            { id: 30, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G1", text: "El periostio es una membrana de tejido conjuntivo denso irregular que recubre la superficie externa de los huesos (excepto en las regiones cubiertas por cartílago articular), conteniendo células osteoprogenitoras esenciales para el crecimiento en grosor y la consolidación de fracturas.", options: ["A) Verdadero.", "B) Falso."], correct: 0, fb: "El periostio posee dois capas: una externa fibrosa protectora y una capa interna osteógena celular rica en células osteoprogenitoras. Es vital para la nutrición ósea, la inserción tendinosa y la reparación tisular tras una fractura (formación del callo óseo)." },
+            { id: 30, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G1", text: "El periostio es una membrana de tejido conjuntivo denso irregular que recubre la superficie externa de los huesos (excepto en las regiones cubiertas por cartílago articular), conteniendo células osteoprogenitoras esenciales para el crecimiento en grosor y la consolidación de fracturas.", options: ["A) Verdadero.", "B) Falso."], correct: 0, fb: "El periostio posee dos capas: una externa fibrosa protectora y una capa interna osteógena celular rica en células osteoprogenitoras. Es vital para la nutrición ósea, la inserción tendinosa y la reparación tisular tras una fractura (formación del callo óseo)." },
             { id: 31, module: "MÓDULO VI: SISTEMA MUSCULAR", tag: "G1", text: "¿Cuál de las siguientes funciones fisiológicas es característica exclusiva del tejido muscular esquelético en comparación con los tejidos muscular liso y cardíaco?", options: ["A) Generar contracciones involuntarias reguladas por el sistema nervioso autónomo.", "B) Presentar control voluntario bajo la inervación del sistema nervioso somático.", "C) Carecer de estriaciones transversales microscópicas.", "D) Estar compuesto por células uninucleadas unidas por discos intercalares."], correct: 1, fb: "El músculo esquelético se une a los huesos y está bajo el control voluntario del sistema nervioso somático (motoneuronas alfa). A diferencia del músculo cardíaco y liso, sus fibras son largas, cilíndricas, multinucleadas y muestran un patrón estriado bien definido." },
             { id: 32, module: "MÓDULO VI: SISTEMA MUSCULAR", tag: "G1", text: "¿Cómo se denomina la capa de tejido conjuntivo denso que envuelve externamente a todo un músculo esquelético completo, manteniéndolo unido y continuo con el tendón?", options: ["A) Endomisio.", "B) Perimisio.", "C) Epimisio.", "D) Sarcolema."], correct: 2, fb: "La organización conjuntiva del músculo esquelético comprende el endomisio (rodea fibras individuales), el perimisio (agrupa fibras en fascículos) y el epimisio (capa densa externa que envuelve al músculo completo y se funde con la fascia profunda y los tendones)." },
             { id: 33, module: "MÓDULO VI: SISTEMA MUSCULAR", tag: "G1", text: "En la ultraestructura de la fibra muscular esquelética, ¿cuál es la unidad anatómica y funcional contráctil básica delimitada entre dos líneas Z consecutivas?", options: ["A) Miofibrilla.", "B) Sarcómero.", "C) Retículo sarcoplásmico.", "D) Túbulo T."], correct: 1, fb: "El sarcómero es la unidad funcional elemental de la contracción muscular estriada. Se extiende desde una línea Z hasta la siguiente e integra la superposición ordenada de filamentos delgados de actina y filamentos gruesos de miosina." },
@@ -422,7 +422,7 @@
             { id: 37, module: "MÓDULO VI: SISTEMA MUSCULAR", tag: "G1", text: "La mioglobina es una proteína fijadora de oxígeno localizada en el citoplasma de las células musculares esqueléticas y cardíacas, la cual posee una mayor afinidad por el oxígeno que la hemoglobina sanguínea, facilitando su almacenamiento y transferencia hacia las mitocondrias.", options: ["A) Verdadero.", "B) Falso."], correct: 0, fb: "La mioglobina es una ferroproteína monomérica intracelular semejante a una subunidad de la hemoglobina. Su alta afinidad por el oxígeno le permite captarlo eficientemente de los capilares y liberarlo dentro del miocito en condiciones de alta demanda metabólica o hipoxia relativa." },
             { id: 38, module: "MÓDULO VI: SISTEMA MUSCULAR", tag: "G1", text: "¿Cómo se define formalmente una unidad motora en la organización funcional del sistema muscular esquelético?", options: ["A) Al conjunto de todas las fibras musculares de un músculo completo inervadas por un solo nervio periférico tronco.", "B) A una única neurona motora somática junto con todas las fibras musculares esqueléticas que esta inerva.", "C) Al complejo de filamentos de actina y miosina delimitados entre dos líneas Z consecutivas.", "D) Al grupo de miofibrillas envueltas internamente por la membrana del perimisio."], correct: 1, fb: "Una unidad motora comprende una neurona motora y todas las fibras musculares esqueléticas que estimula. Los músculos con control fino y preciso (ej. músculos extrínsecos del ojo) tienen unidades motoras pequeñas (pocas fibras por neurona), mientras que los músculos de carga (ej. gastrocnemio) tienen unidades motoras grandes." },
             { id: 39, module: "MÓDULO VI: SISTEMA MUSCULAR", tag: "G1", text: "¿Qué evento fisiológico desencadena de forma directa el proceso de acoplamiento excitación-contracción en el músculo esquelético tras la llegada del impulso nervioso?", options: ["A) La liberación masiva de iones de calcio desde el retículo sarcoplásmico hacia el sarcoplasma.", "B) La destrucción enzimática de los túbulos T por acción de la acetilcolinesterasa.", "C) La síntesis inmediata de creatinquinasa en la membrana mitocondrial externa.", "D) La entrada masiva de potasio extracelular al interior del espacio intracelular."], correct: 0, fb: "El acoplamiento excitación-contracción describe la transducción eléctrica a mecánica. La propagación del potencial de acción a través de los túbulos T activa los receptores de dihidropiridina, los cuales abren los canales de rianodina del retículo sarcoplásmico, liberando el calcio necesario para la contracción." },
-            { id: 40, module: "MÓDULO VI: SISTEMA MUSCULAR", tag: "G1", text: "El muscular liso presenta estriaciones transversales visibles al microscopio debido a la organización repetitiva de sus filamentos en sarcómeros, funcionando bajo control estrictamente voluntario.", options: ["A) Verdadero.", "B) Falso."], correct: 1, fb: "El músculo liso carece de sarcómeros y estriaciones transversales organizadas (sus filamentos de actina y miosina se disponen en redes ancladas a cuerpos densos). Además, su control es involuntario, estando regulado por el sistema nervioso autónomo, hormonas y factores locales." }
+            { id: 40, module: "MÓDULO VI: SISTEMA MUSCULAR", tag: "G1", text: "El tejido muscular liso presenta estriaciones transversales visibles al microscopio debido a la organización repetitiva de sus filamentos en sarcómeros, funcionando bajo control estrictamente voluntario.", options: ["A) Verdadero.", "B) Falso."], correct: 1, fb: "El músculo liso carece de sarcómeros y estriaciones transversales organizadas (sus filamentos de actina y miosina se disponen en redes ancladas a cuerpos densos). Además, su control es involuntario, estando regulado por el sistema nervioso autónomo, hormonas y factores locales." }
         ];
 
         let currentIdx = 0;
@@ -434,7 +434,6 @@
         let timerInterval = null;
         let moduleStats = {};
 
-        // Validar si el dispositivo ya tiene un examen registrado al cargar la página
         window.onload = function() {
             if (localStorage.getItem("exam_completed_garfel")) {
                 document.getElementById("registration-screen").classList.add("hidden");
@@ -592,7 +591,6 @@
         function finishExam() {
             clearInterval(timerInterval);
             
-            // Marcar este dispositivo como examen completado en localStorage
             localStorage.setItem("exam_completed_garfel", "true");
 
             document.getElementById("exam-screen").classList.add("hidden");
