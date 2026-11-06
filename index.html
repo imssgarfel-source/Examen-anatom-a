@@ -20,7 +20,7 @@
             --border: #e2e8f0;
         }
 
-        /* BLINDAJE TÁCTIL ABSOLUTO: Frena el rebote y la recarga nativa del navegador móvil en raíz */
+        /* NÚCLEO INMUTABLE 1: BLINDAJE TÁCTIL Y ANTI-SELECCIÓN */
         html, body {
             width: 100%;
             height: 100%;
@@ -273,7 +273,7 @@
 </head>
 <body>
 
-    <!-- Pantalla de Bloqueo por Intento Previo en este Dispositivo -->
+    <!-- NÚCLEO INMUTABLE 2: BLOQUEO POR DISPOSITIVO (LOCALSTORAGE) -->
     <div id="blocked-screen" class="container hidden">
         <div class="card" style="text-align: center; padding: 20px;">
             <div style="font-size: 2.5rem; margin-bottom: 10px;">⚠️</div>
@@ -382,6 +382,7 @@
     </div>
 
     <script>
+        /* NÚCLEO INMUTABLE 3: BANCO DE 40 REACTIVOS OFICIALES 1:1 */
         const questions = [
             { id: 1, module: "MÓDULO I: HOMEOSTASIS", tag: "G1", text: "¿Cómo se define formalmente el concepto fisiológico de homeostasis en el organismo humano?", options: ["A) La capacidad del cuerpo para mantener un ambiente interno constante y relativamente estable frente al entorno.", "B) El estado patológico irreversible de descompensación orgánica y fallo multiorgánico.", "C) El proceso exclusivo de división celular acelerada en tejidos en constante crecimiento.", "D) La eliminación total de los productos de desecho metabólico mediante el sistema linfático."], correct: 0, fb: "La homeostasis representa el conjunto de procesos fisiológicos autorreguladores mediante los cuales los sistemas biológicos mantienen estables las condiciones internas (como pH, temperatura, presión arterial y concentración de electrolitos) necesarias para la supervivencia celular frente a fluctuaciones ambientales externas." },
             { id: 2, module: "MÓDULO I: HOMEOSTASIS", tag: "G1", text: "Los mecanismos de retroalimentación negativa son los principales responsables de estabilizar los sistemas fisiológicos al oponerse o revertir el estímulo inicial que alteró la variable regulada.", options: ["A) Verdadero.", "B) Falso."], correct: 0, fb: "La retroalimentación negativa es el principal sistema de control homeostático del organismo. Detecta una desviación de un parámetro fisiológico (ej. aumento de la glucemia o de la temperatura corporal) y desencadena respuestas efectoras que contrarrestan el cambio para restaurar el valor de referencia." },
@@ -434,11 +435,18 @@
         let timerInterval = null;
         let moduleStats = {};
 
+        /* NÚCLEO INMUTABLE 4: VALIDACIÓN DE INTENTO PREVIO Y BLOQUEO DE HISTORIAL NATIVO */
         window.onload = function() {
             if (localStorage.getItem("exam_completed_garfel")) {
                 document.getElementById("registration-screen").classList.add("hidden");
                 document.getElementById("blocked-screen").classList.remove("hidden");
             }
+            
+            // Empujar estado ficticio al historial para interceptar gestos de "Atrás"
+            history.pushState(null, null, location.href);
+            window.onpopstate = function() {
+                history.go(1); // Bloquea el retroceso forzando al navegador a mantenerse en el estado actual
+            };
         };
 
         function requestUnlock() {
@@ -591,6 +599,7 @@
         function finishExam() {
             clearInterval(timerInterval);
             
+            /* NÚCLEO INMUTABLE 5: REGISTRO DE FINALIZACIÓN */
             localStorage.setItem("exam_completed_garfel", "true");
 
             document.getElementById("exam-screen").classList.add("hidden");
@@ -648,3 +657,6 @@
     </script>
 </body>
 </html>
+
+
+
