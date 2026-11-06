@@ -3,55 +3,607 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluación Concluida - Anatomía y Fisiología</title>
+    <title>Examen de Anatomía y Fisiología - 2.º Parcial</title>
     <style>
-        body {
-            background-color: #f7fafc;
-            color: #2d3748;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        :root {
+            --primary: #1a365d;
+            --primary-light: #2b6cb0;
+            --accent: #2c7a7b;
+            --success: #2f855a;
+            --success-bg: #f0fff4;
+            --error: #c53030;
+            --error-bg: #fff5f5;
+            --bg: #f7fafc;
+            --card: #ffffff;
+            --text: #2d3748;
+            --text-muted: #718096;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            /* BLINDAJE ANTI-IA: Bloquea la selección y copia de texto */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
         }
-        .card {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            max-width: 500px;
-            text-align: center;
-            border-top: 5px solid #c53030;
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.4;
+            padding-bottom: 20px;
         }
-        h2 {
-            color: #1a365d;
-            margin-bottom: 10px;
-            font-size: 1.4rem;
+
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 8px 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        p {
-            color: #718096;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
+
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 4px;
         }
-        .badge {
-            background: #fff5f5;
-            color: #c53030;
-            padding: 8px 15px;
-            border-radius: 20px;
+
+        .header-title h1 {
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .header-title p {
+            font-size: 0.7rem;
+            opacity: 0.85;
+        }
+
+        .header-stats {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 3px 6px;
+            border-radius: 10px;
+            font-size: 0.7rem;
             font-weight: 600;
-            font-size: 0.85rem;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .stat-badge.correct-badge { background: rgba(47, 133, 90, 0.4); }
+        .stat-badge.error-badge { background: rgba(197, 48, 48, 0.4); }
+
+        .container {
+            max-width: 900px;
+            margin: 10px auto;
+            padding: 0 8px;
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            margin-bottom: 10px;
+        }
+
+        #registration-screen {
+            max-width: 400px;
+            margin: 30px auto;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            outline: none;
+            -webkit-user-select: text;
+            user-select: text;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn:hover:not(:disabled) { background: var(--primary-light); }
+        .btn:disabled { background: #a0aec0; cursor: not-allowed; }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .q-tag {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 5px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .q-tag.g1 { background: #ebf8ff; color: #2b6cb0; }
+        .q-tag.g2 { background: #fefcbf; color: #744210; }
+
+        .q-module {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .q-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1a202c;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .option-btn {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 10px;
+            text-align: left;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        .option-btn:hover:not(:disabled) { background: #edf2f7; border-color: #cbd5e0; }
+        .option-btn:disabled { cursor: default; }
+
+        .option-btn.correct {
+            background: var(--success-bg) !important;
+            border-color: var(--success) !important;
+            color: var(--success) !important;
+            font-weight: 600;
+        }
+
+        .option-btn.incorrect {
+            background: var(--error-bg) !important;
+            border-color: var(--error) !important;
+            color: var(--error) !important;
+        }
+
+        .feedback-box {
+            margin-top: 8px;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .feedback-box.show { display: block; }
+        .feedback-box.correct-fb { background: var(--success-bg); border-left: 4px solid var(--success); color: #22543d; }
+        .feedback-box.incorrect-fb { background: var(--error-bg); border-left: 4px solid var(--error); color: #742a2a; }
+
+        .feedback-title { font-weight: 700; margin-bottom: 2px; display: flex; align-items: center; gap: 4px; }
+
+        /* BARRA DE NAVEGACIÓN SUPERIOR (Propuesta del Doctor) */
+        .top-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 10px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+
+        .score-summary { text-align: center; padding: 10px 0; }
+        .score-circle {
+            width: 90px; height: 90px; border-radius: 50%;
+            background: var(--primary); color: white;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            margin: 0 auto 10px;
+        }
+        .score-val { font-size: 1.6rem; font-weight: 800; line-height: 1; }
+        .score-max { font-size: 0.7rem; opacity: 0.8; }
+
+        .module-breakdown { margin-top: 15px; }
+        .module-item { margin-bottom: 8px; }
+        .module-info { display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 2px; font-weight: 600; }
+        .progress-bar { height: 5px; background: #edf2f7; border-radius: 3px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--primary-light); width: 0%; transition: width 0.5s ease-out; }
+
+        .hidden { display: none !important; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-3px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h2>🔒 Evaluación Finalizada</h2>
-        <p>El periodo oficial de aplicación para este examen parcial ha concluido. Agradecemos su participación y esfuerzo académico.</p>
-        <div class="badge">Acceso Cerrado</div>
+
+    <!-- Registration Screen -->
+    <div id="registration-screen" class="container">
+        <div class="card">
+            <h2 style="color: var(--primary); margin-bottom: 4px; text-align: center; font-size: 1.1rem;">Examen de Anatomía y Fisiología</h2>
+            <p style="color: var(--text-muted); font-size: 0.8rem; text-align: center; margin-bottom: 15px;">2.º Parcial — Licenciatura en Enfermería y TSUM</p>
+            
+            <form id="reg-form" onsubmit="startExam(event)">
+                <div class="form-group">
+                    <label for="student-name">Nombre Completo del Alumno:</label>
+                    <input type="text" id="student-name" required placeholder="Ej. Juan Pérez García">
+                </div>
+                
+                <div class="form-group">
+                    <label for="student-career">Carrera / Licenciatura:</label>
+                    <select id="student-career" required>
+                        <option value="">Seleccione una opción...</option>
+                        <option value="Licenciatura en Enfermería">Licenciatura en Enfermería</option>
+                        <option value="Técnico Superior en Urgencias Médicas (TSUM)">Técnico Superior en Urgencias Médicas (TSUM)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">Iniciar Examen</button>
+            </form>
+        </div>
     </div>
+
+    <!-- Main Exam Interface -->
+    <div id="exam-screen" class="hidden">
+        <header>
+            <div class="header-container">
+                <div class="header-title">
+                    <h1 id="hdr-student-name">Alumno</h1>
+                    <p id="hdr-student-career">Carrera</p>
+                </div>
+                <div class="header-stats">
+                    <div class="stat-badge" id="timer-badge">⏱️ 00:00</div>
+                    <div class="stat-badge correct-badge" id="correct-badge">✓ 0/32</div>
+                    <div class="stat-badge error-badge" id="error-badge">✗ 0/32</div>
+                    <div class="stat-badge" id="progress-badge">1 / 32</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <!-- BARRA DE NAVEGACIÓN SUPERIOR (IMPLEMENTADA POR EL DOCTOR) -->
+            <div class="top-nav-bar">
+                <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary);">Navegación de Preguntas</span>
+                <button class="btn" style="width: auto; padding: 6px 14px; font-size: 0.85rem;" onclick="nextQuestion()" id="top-btn-next" disabled>Siguiente ➡️</button>
+                <button class="btn hidden" style="background: var(--success); width: auto; padding: 6px 14px; font-size: 0.85rem;" onclick="finishExam()" id="top-btn-finish" disabled>Finalizar 🏁</button>
+            </div>
+
+            <div class="card" id="question-card">
+                <div class="q-header">
+                    <span class="q-module" id="q-module">MÓDULO</span>
+                    <span class="q-tag" id="q-tag">G1</span>
+                </div>
+                <div class="q-text" id="q-text">Cargando pregunta...</div>
+                <div class="options-list" id="options-list"></div>
+                
+                <div class="feedback-box" id="feedback-box">
+                    <div class="feedback-title" id="fb-title"></div>
+                    <div id="fb-text"></div>
+                </div>
+            </div>
+
+            <!-- BOTÓN INFERIOR SECUNDARIO -->
+            <div style="display: flex; justify-content: flex-end; margin-bottom: 15px;">
+                <button class="btn" style="width: auto;" onclick="nextQuestion()" id="btn-next" disabled>Siguiente Pregunta ➡️</button>
+                <button class="btn hidden" style="background: var(--success); width: auto;" onclick="finishExam()" id="btn-finish" disabled>Finalizar Examen 🏁</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="results-screen" class="container hidden">
+        <div class="card">
+            <h2 style="color: var(--primary); text-align: center; margin-bottom: 4px; font-size: 1.1rem;">Resultados de la Evaluación</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-bottom: 12px;" id="res-student-info"></p>
+
+            <div class="score-summary">
+                <div class="score-circle">
+                    <div class="score-val" id="res-score-val">0.0</div>
+                    <div class="score-max">de 10.0</div>
+                </div>
+                <p id="res-time-summary" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px;"></p>
+                <p id="res-feedback-summary" style="font-weight: 600; color: var(--primary); font-size: 0.85rem;"></p>
+            </div>
+
+            <div class="module-breakdown" id="module-breakdown">
+                <h3 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 8px;">Desglose de Desempeño por Módulo:</h3>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <button class="btn" style="background: #4a5568;" onclick="requestFacultyReset()">Reinicio Docente (Clave Requerida)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            { id: 1, module: "MÓDULO I: HOMEOSTASIS", tag: "G1", text: "¿Cómo se define formalmente el concepto fisiológico de homeostasis en el organismo humano?", options: ["A) La capacidad del cuerpo para mantener un ambiente interno constante y relativamente estable frente al entorno.", "B) El estado patológico irreversible de descompensación orgánica y fallo multiorgánico.", "C) El proceso exclusivo de división celular acelerada en tejidos en constante crecimiento.", "D) La eliminación total de los productos de desecho metabólico mediante el sistema linfático."], correct: 0, fb: "La homeostasis representa el conjunto de procesos fisiológicos autorreguladores mediante los cuales los sistemas biológicos mantienen estables las condiciones internas frente a fluctuaciones ambientales." },
+            { id: 2, module: "MÓDULO I: HOMEOSTASIS", tag: "G1", text: "Los mecanismos de retroalimentación negativa son los principales responsables de estabilizar los sistemas fisiológicos al oponerse o revertir el estímulo inicial que alteró la variable regulada.", options: ["A) Verdadero.", "B) Falso."], correct: 0, fb: "La retroalimentación negativa es el principal sistema de control homeostático. Detecta una desviación de un parámetro y desencadena respuestas efectoras que contrarrestan el cambio." },
+            { id: 3, module: "MÓDULO II: TEJIDO EPITELIAL", tag: "G1", text: "¿Cuál de las siguientes características histológicas es distintiva del tejido epitelial?", options: ["A) Estar altamente vascularizado y poseer abundante matriz extracelular fibrilar.", "B) Presentar células escasas separadas por amplios espacios intersticiales de colágeno.", "C) Ser avascular, apoyarse sobre una membrana basal y presentar una alta celularidad con escasa matriz extracelular.", "D) Carecer de polaridad celular y especializaciones de membrana apical."], correct: 2, fb: "El tejido epitelial se caracteriza por su alta celularidad, escasa matriz extracelular, avascularidad y nutrición por difusión a través de la membrana basal." },
+            { id: 4, module: "MÓDULO II: TEJIDO EPITELIAL", tag: "G2", text: "¿Qué tipo de epitelio se encuentra tapizando la superficie interna de los vasos sanguíneos y linfáticos (endotelio) y los alvéolos pulmonares, facilitando el intercambio por difusión?", options: ["A) Epitelio plano simple.", "B) Epitelio cilíndrico pseudoestratificado ciliado.", "C) Epitelio cúbico estratificado queratinizado.", "D) Epitelio de transición o urotelio."], correct: 0, fb: "El epitelio plano simple ofrece una resistencia mínima al paso de sustancias, optimizando la difusión de gases y solutos." },
+            { id: 5, module: "MÓDULO II: TEJIDO EPITELIAL", tag: "G1", text: "¿En qué localización anatómica del cuerpo humano se localiza típicamente el epitelio de transición (urotelio) para permitir la distensión orgánica?", options: ["A) En la epidermis de la piel gruesa palmar.", "B) En la vía aérea superior (tráquea y bronquios principales).", "C) En las vías urinarias excretoras, incluyendo la vejiga urinaria y los uréteres.", "D) En el revestimiento interno del estómago y del intestino delgado."], correct: 2, fb: "El urotelio es exclusivo de las vías urinarias excretoras y sus células se adaptan estructuralmente para distenderse sin perder integridad." },
+            { id: 6, module: "MÓDULO II: TEJIDO EPITELIAL", tag: "G1", text: "¿Cuál es la principal característica diferencial de las glándulas endocrinas en comparación con las glándulas exocrinas en el cuerpo humano?", options: ["A) Poseen conductos excretores ramificados que vierten su producto en la superficie corporal.", "B) Vierten sus hormonas directamente a los vasos sanguíneos o linfáticos al carecer de conductos excretores.", "C) Liberan exclusivamente mucina y sebo mediante transporte vesicular hacia la cavidad oral.", "D) Están formadas por tejido conjuntivo denso irregular altamente irrigado."], correct: 1, fb: "Las glándulas endocrinas carecen de conductos excretores y secretan hormonas directamente al torrente circulatorio." },
+            { id: 7, module: "MÓDULO II: TEJIDO EPITELIAL", tag: "G1", text: "El tejido epitelial se caracteriza por presentar una clara polaridad morfofuncional, lo que significa que sus células poseen una superficie apical expuesta a una luz o cavidad, una superficie lateral unida a células vecinas y una superficie basal apoyada sobre la membrana basal.", options: ["A) Verdadero.", "B) Falso."], correct: 0, fb: "La polaridad celular es indispensable en los epitelios: región apical hacia la luz, lateral unida a células vecinas y basal anclada a la membrana basal." },
+            { id: 8, module: "MÓDULO III: TEJIDO CONJUNCTIVO", tag: "G1", text: "¿Cuál de las siguientes opciones describe de manera correcta la composición estructural general del tejido conjuntivo (conectivo)?", options: ["A) Células densamente empaquetadas sin matriz extracelular ni irrigación.", "B) Células dispersas inmersas en una abundante matriz extracelular compuesta por fibras proteicas y sustancia fundamental.", "C) Fibras musculares estriadas unidas por discos intercalados y sin fibroblastos.", "D) Capas continuas de células avasculares unidas por complejos de unión estrecha."], correct: 1, fb: "El tejido conjuntivo se compone de células dispersas inmersas en abundante matriz extracelular (fibras proteicas y sustancia fundamental)." },
+            { id: 9, module: "MÓDULO III: TEJIDO CONJUNCTIVO", tag: "G2", text: "¿Qué tipo principal de fibra extracelular presente en el tejido conjuntivo laxo y denso proporciona gran resistencia a la tracción mecánica y flexibilidad estructural?", options: ["A) Fibras de elastina.", "B) Fibras de colágeno.", "C) Fibras reticulares de argirofilia fina.", "D) Filamentos de actina globular."], correct: 1, fb: "Las fibras de colágeno son las más abundantes y aportan resistencia estructural contra la tracción mecánica." },
+            { id: 10, module: "MÓDULO III: TEJIDO CONJUNCTIVO", tag: "G1", text: "El tejido conjuntivo denso irregular presenta haces de fibras de colágeno dispuestos en direcciones múltiples y desordenadas, lo que le otorga la capacidad de resistir fuerzas de tensión provenientes de diversas direcciones (como en la dermis reticular).", options: ["A) Verdadero.", "B) Falso."], correct: 0, fb: "El tejido denso irregular posee fibras multidireccionales para soportar tensiones desde distintos ángulos." },
+            { id: 11, module: "MÓDULO IV: SISTEMA TEGUMENTARIO", tag: "G1", text: "¿Cuál de las siguientes opciones describe una función fisiológica esencial de la piel (sistema tegumentario)?", options: ["A) Síntesis primaria de factores de coagulación sanguínea y eritropoyetina.", "B) Regulación térmica, protección contra patógenos y síntesis activa de vitamina D (colecalciferol).", "C) Absorción directa de oxígeno atmosférico para la respiración celular sistémica.", "D) Conducción exclusiva de impulsos motores voluntarios hacia el tejido esquelético."], correct: 1, fb: "La piel actúa como barrera, regula la temperatura corporal y sintetiza activamente el precursor de la vitamina D." },
+            { id: 12, module: "MÓDULO IV: SISTEMA TEGUMENTARIO", tag: "G1", text: "¿Cómo se denomina la capa más superficial de la epidermis, compuesta por células muertas queratinizadas aplanadas que se descaman continuamente?", options: ["A) Estrato basal (o germinativo).", "B) Estrato espinoso.", "C) Estrato córneo.", "D) Estrato lúcido."], correct: 2, fb: "El estrato córneo es la capa superficial de la epidermis con corneocitos queratinizados que constituyen la principal barrera protectora." },
+            { id: 13, module: "MÓDULO IV: SISTEMA TEGUMENTARIO", tag: "G2", text: "¿Qué tipo celular de la epidermis es el responsable de la síntesis del pigmento melanina, el cual protege los núcleos celulares frente a la radiación ultravioleta?", options: ["A) Queratinocitos basales.", "B) Melanocitos.", "C) Células de Langerhans (dendríticas).", "D) Células de Merkel táctiles."], correct: 1, fb: "Los melanocitos sintetizan melanina para proteger el ADN nuclear frente al daño actínico de la radiación UV." },
+            { id: 14, module: "MÓDULO IV: SISTEMA TEGUMENTARIO", tag: "G1", text: "Las células de Langerhans son macrófagos epidérmicos residentes que desempeñan un papel fundamental en la vigilancia inmunológica de la piel, capturando y presentando antígenos.", options: ["A) Verdadero.", "B) Falso."], correct: 0, fb: "Las células de Langerhans son células dendríticas epidérmicas encargadas de la vigilancia inmunológica y presentación de antígenos." },
+            { id: 15, module: "MÓDULO IV: SISTEMA TEGUMENTARIO", tag: "G2", text: "¿Qué capa estructural de la piel, situada por debajo de la epidermis, está compuesta principalmente por tejido conjuntivo denso irregular, fibras de colágeno y elastina, albergando anexos cutáneos como folículos pilosos y glándulas?", options: ["A) Hipodermis o tejido subcutáneo adiposo.", "B) Dermis.", "C) Estrato lúcido epidérmico.", "D) Capa basal germinativa."], correct: 1, fb: "La dermis es el soporte fibrovascular subyacente que contiene colágeno, elastina, vasos, nervios y anexos cutáneos." },
+            { id: 16, module: "MÓDULO IV: SISTEMA TEGUMENTARIO", tag: "G1", text: "¿Cómo se denominan las glándulas exocrinas cutáneas de secreción merocrina distribuidas por todo el cuerpo, cuya función principal es la producción de sudor acuoso para la termorregulación corporal?", options: ["A) Glándulas sebáceas holocrinas.", "B) Glándulas sudoríparas ecrinas.", "C) Glándulas sudoríparas apocrinas axilares.", "D) Glándulas ceruminosas del conducto auditivo."], correct: 1, fb: "Las glándulas ecrinas producen sudor acuoso merocrino fundamental para la termorregulación por evaporación." },
+            { id: 17, module: "MÓDULO IV: SISTEMA TEGUMENTARIO", tag: "G1", text: "En la clasificación de las quemaduras según su profundidad tisular, ¿qué característica clínica define clásicamente a una quemadura de segundo grado superficial (espesor parcial)?", options: ["A) Afectación exclusiva de la epidermis con enrojecimiento (eritema) y ausencia de ampollas.", "B) Presencia de flictenas (ampollas), dolor intenso, base húmeda y color rosado brillante.", "C) Destrucción total de la piel con aspecto blanquecino o carbonizado e insensibilidad al dolor.", "D) Compromiso exclusivo del tejido adiposo subcutáneo y fascia muscular profunda."], correct: 1, fb: "Las quemaduras de segundo grado superficial presentan flictenas, hiperalgesia y lecho húmedo rosado." },
+            { id: 18, module: "MÓDULO IV: SISTEMA TEGUMENTARIO", tag: "G2", text: "¿Qué regla clínica anatómica rápida se utiliza comúnmente en urgencias médicas para estimar de forma porcentual la superficie corporal total quemada en un paciente adulto?", options: ["A) La escala de coma de Glasgow modificada.", "B) La regla de los nueve de Wallace.", "C) El índice de masa corporal estandarizado.", "D) La clasificación de Apgar cutánea."], correct: 1, fb: "La Regla de los Nueve de Wallace calcula rápidamente el porcentaje de superficie quemada en el adulto." },
+            { id: 19, module: "MÓDULO IV: SISTEMA TEGUMENTARIO", tag: "G1", text: "El pelo y las uñas son anexos cutáneos queratinizados derivados de invaginaciones de la epidermis durante el desarrollo embrionario.", options: ["A) Verdadero.", "B) Falso."], correct: 0, fb: "Pelo y uñas son estructuras queratinizadas originadas de invaginaciones embrionarias de la epidermis." },
+            { id: 20, module: "MÓDULO IV: SISTEMA TEGUMENTARIO", tag: "G2", text: "¿Qué estrato de la epidermis se encuentra presente únicamente en la piel gruesa (como las palmas de las manos y las plantas de los pies) y se caracteriza por una capa translúcida de queratinocitos muertos?", options: ["A) Estrato espinoso.", "B) Estrato lúcido.", "C) Estrato granuloso.", "D) Estrato papilar dérmico."], correct: 1, fb: "El estrato lúcido es una capa transparente exclusiva de la piel gruesa palmar y plantar." },
+            { id: 21, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G1", text: "¿Cuál de las siguientes opciones representa una función fisiológica fundamental del tejido óseo, además de brindar soporte mecánico y protección a los órganos internos?", options: ["A) Almacenamiento de triglicéridos e inhibición de la eritropoyesis renal.", "B) Reservorio dinámico de minerales (calcio y fósforo) y hematopoyesis en la médula ósea roja.", "C) Síntesis de troponina y miosina para la contracción muscular voluntaria.", "D) Secreción de moco rico en mucina para la lubricación articular."], correct: 1, fb: "El tejido óseo almacena calcio y fósforo y alberga la médula ósea roja hematopoyética." },
+            { id: 22, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G1", text: "¿Cómo se denominan las células óseas maduras derivadas de los osteoblastos que quedan atrapadas en lagunas de la matriz calcificada y mantienen el metabolismo celular diario del hueso?", options: ["A) Osteoclastos multinucleados.", "B) Células osteoprogenitoras estromales.", "C) Condrocitos hialinos.", "D) Osteocitos."], correct: 3, fb: "Los osteocitos son células maduras alojadas en lagunas que mantienen el metabolismo óseo." },
+            { id: 23, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G2", text: "¿Qué células gigantes multinucleadas, derivadas de la fusión de monocitos sanguíneos, son las responsables de la resorción y degradación de la matriz ósea durante el remodelado esquelético?", options: ["A) Osteoclastos.", "B) Osteoblastos.", "C) Condroblastos.", "D) Osteocitos."], correct: 0, fb: "Los osteoclastos son células multinucleadas especializadas en la reabsorción y degradación de la matriz ósea." },
+            { id: 24, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G1", text: "¿Cuál es la prueba de referencia internacional (estándar de oro) recomendada para la medición de la densidad mineral ósea y el diagnóstico clínico de la osteoporosis?", options: ["A) Radiografía convencional de columna dorsal.", "B) Tomografía axial computarizada de huesos largos.", "C) Densitometría ósea (DXA) en columna lumbar y cadera.", "D) Gammagrafía ósea con tecnecio-99."], correct: 2, fb: "La densitometría ósea DXA es el estándar de oro para el diagnóstico clínico de la osteoporosis." },
+            { id: 25, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G1", text: "En la anatomía de un hueso largo (como el fémur o el húmero), ¿qué término designa al cuerpo o porción principal cilíndrica compuesta predominantemente por hueso compacto?", options: ["A) Epífisis.", "B) Diáfisis.", "C) Metáfisis.", "D) Cartílago articular."], correct: 1, fb: "La diáfisis es el cuerpo tubular central de un hueso largo, compuesto por hueso compacto." },
+            { id: 26, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G2", text: "¿En qué región anatómica de un hueso largo en fase de crecimiento se localiza la placa epifisaria (o disco de crecimiento cartilaginoso) que permite el alargamiento longitudinal?", options: ["A) En la cavidad medular central.", "B) En la capa externa del periostio.", "C) En la metáfisis.", "D) En el endostio trabecular."], correct: 2, fb: "La metáfisis alberga la placa epifisaria de crecimiento longitudinal." },
+            { id: 27, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G1", text: "¿Cuáles de los siguientes huesos forman parte del esqueleto axial humano?", options: ["A) Húmero, fémur y escápula.", "B) Clavícula, radio y coxal.", "C) Cráneo, columna vertebral, esternón y costillas.", "D) Tibia, peroné y huesos del tarso."], correct: 2, fb: "El esqueleto axial comprende el cráneo, columna vertebral, esternón y costillas." },
+            { id: 28, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G1", text: "¿Cuál de las siguientes características clínicas e histopatológicas define clásicamente a la osteoartritis (artrosis) en comparación con las artropatías inflamatorias?", options: ["A) Presencia de dolor mecánico que empeora con el movimiento y mejora con el reposo, asociado al desgaste del cartílago articular.", "B) Rigidez matutina generalizada superior a una hora e inflamación simétrica de pequeñas articulaciones.", "C) Presencia masiva de autoanticuerpos contra el factor reumatoide en suero.", "D) Destrucción sinovial primaria de origen autoinmune con anquilosis precoz."], correct: 0, fb: "La osteoartritis cursa con dolor de características mecánicas asociado al desgaste del cartílago." },
+            { id: 29, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G1", text: "¿Qué tipo de cartílago cubre las superficies de las articulaciones móviles (diartrodias) y sirve de modelo para formar los huesos durante el desarrollo embrionario?", options: ["A) Cartílago elástico.", "B) Cartílago hialino.", "C) Fibrocartílago denso.", "D) Cartílago reticular."], correct: 1, fb: "El cartílago hialino cubre superficies articulares y sirve de modelo embrionario para la osificación." },
+            { id: 30, module: "MÓDULO V: SISTEMA ÓSEO - ARTICULAR - CARTILAGINOSO", tag: "G1", text: "El periostio es una membrana de tejido conjuntivo denso irregular que recubre la superficie externa de los huesos (excepto en las regiones cubiertas por cartílago articular), conteniendo células osteoprogenitoras esenciales para el crecimiento en grosor y la consolidación de fracturas.", options: ["A) Verdadero.", "B) Falso."], correct: 0, fb: "El periostio recubre externamente el hueso y aporta células osteoprogenitoras para el crecimiento y consolidación." },
+            { id: 31, module: "MÓDULO VI: SISTEMA MUSCULAR", tag: "G1", text: "¿Cuál de las siguientes funciones fisiológicas es característica exclusiva del tejido muscular esquelético en comparación con los tejidos muscular liso y cardíaco?", options: ["A) Generar contracciones involuntarias reguladas por el sistema nervioso autónomo.", "B) Presentar control voluntario bajo la inervación del sistema nervioso somático.", "C) Carecer de estriaciones transversales microscópicas.", "D) Estar compuesto por células uninucleadas unidas por discos intercalares."], correct: 1, fb: "El músculo esquelético se caracteriza por estar bajo control voluntario del sistema nervioso somático." },
+            { id: 32, module: "MÓDULO VI: SISTEMA MUSCULAR", tag: "G1", text: "¿Cómo se denomina la capa de tejido conjuntivo denso que envuelve externamente a todo un músculo esquelético completo, manteniéndolo unido y continuo con el tendón?", options: ["A) Endomisio.", "B) Perimisio.", "C) Epimisio.", "D) Sarcolema."], correct: 2, fb: "El epimisio es la capa de tejido conjuntivo denso que envuelve externamente a todo el músculo." }
+        ];
+
+        let currentIdx = 0;
+        let score = 0;
+        let errors = 0;
+        let studentName = "";
+        let studentCareer = "";
+        let startTime = null;
+        let timerInterval = null;
+        let moduleStats = {};
+
+        function initStats() {
+            moduleStats = {};
+            questions.forEach(q => {
+                if (!moduleStats[q.module]) {
+                    moduleStats[q.module] = { total: 0, correct: 0 };
+                }
+                moduleStats[q.module].total++;
+            });
+        }
+
+        function startExam(e) {
+            e.preventDefault();
+            studentName = document.getElementById("student-name").value.trim();
+            studentCareer = document.getElementById("student-career").value;
+
+            if (!studentName || !studentCareer) return;
+
+            document.getElementById("hdr-student-name").textContent = studentName;
+            document.getElementById("hdr-student-career").textContent = studentCareer;
+
+            document.getElementById("registration-screen").classList.add("hidden");
+            document.getElementById("exam-screen").classList.remove("hidden");
+
+            initStats();
+            initBadges();
+            startTime = Date.now();
+            timerInterval = setInterval(updateTimer, 1000);
+
+            loadQuestion();
+        }
+
+        function initBadges() {
+            document.getElementById("correct-badge").textContent = `✓ 0/${questions.length}`;
+            document.getElementById("error-badge").textContent = `✗ 0/${questions.length}`;
+        }
+
+        function updateTimer() {
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const mins = String(Math.floor(elapsed / 60)).padStart(2, '0');
+            const secs = String(elapsed % 60).padStart(2, '0');
+            document.getElementById("timer-badge").textContent = `⏱️ ${mins}:${secs}`;
+        }
+
+        function loadQuestion() {
+            const q = questions[currentIdx];
+            document.getElementById("q-module").textContent = q.module;
+            const tagEl = document.getElementById("q-tag");
+            tagEl.textContent = q.tag;
+            tagEl.className = `q-tag ${q.tag.toLowerCase()}`;
+
+            document.getElementById("q-text").textContent = `${currentIdx + 1}. ${q.text}`;
+            document.getElementById("progress-badge").textContent = `${currentIdx + 1} / ${questions.length}`;
+
+            const optionsList = document.getElementById("options-list");
+            optionsList.innerHTML = "";
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.textContent = opt;
+                btn.onclick = () => selectOption(idx);
+                optionsList.appendChild(btn);
+            });
+
+            const fbBox = document.getElementById("feedback-box");
+            fbBox.className = "feedback-box";
+            fbBox.style.display = "none";
+
+            // Control de botones superior e inferior
+            document.getElementById("top-btn-next").disabled = true;
+            document.getElementById("btn-next").disabled = true;
+
+            if (currentIdx === questions.length - 1) {
+                document.getElementById("top-btn-next").classList.add("hidden");
+                document.getElementById("top-btn-finish").classList.remove("hidden");
+                document.getElementById("top-btn-finish").disabled = true;
+
+                document.getElementById("btn-next").classList.add("hidden");
+                document.getElementById("btn-finish").classList.remove("hidden");
+                document.getElementById("btn-finish").disabled = true;
+            } else {
+                document.getElementById("top-btn-next").classList.remove("hidden");
+                document.getElementById("top-btn-finish").classList.add("hidden");
+
+                document.getElementById("btn-next").classList.remove("hidden");
+                document.getElementById("btn-finish").classList.add("hidden");
+            }
+        }
+
+        function selectOption(selectedIdx) {
+            const q = questions[currentIdx];
+            const options = document.querySelectorAll(".option-btn");
+
+            options.forEach((btn, idx) => {
+                btn.disabled = true;
+                if (idx === q.correct) {
+                    btn.classList.add("correct");
+                } else if (idx === selectedIdx && selectedIdx !== q.correct) {
+                    btn.classList.add("incorrect");
+                }
+            });
+
+            const fbBox = document.getElementById("feedback-box");
+            const fbTitle = document.getElementById("fb-title");
+            const fbText = document.getElementById("fb-text");
+
+            if (selectedIdx === q.correct) {
+                score++;
+                moduleStats[q.module].correct++;
+                fbBox.className = "feedback-box show correct-fb";
+                fbTitle.innerHTML = "✓ ¡Respuesta Correcta!";
+            } else {
+                errors++;
+                fbBox.className = "feedback-box show incorrect-fb";
+                fbTitle.innerHTML = "✗ Respuesta Incorrecta";
+            }
+            fbBox.style.display = "block";
+            fbText.innerHTML = `<strong>Fundamento clínico:</strong> ${q.fb}`;
+
+            document.getElementById("correct-badge").textContent = `✓ ${score}/${questions.length}`;
+            document.getElementById("error-badge").textContent = `✗ ${errors}/${questions.length}`;
+
+            // Habilitar botones superior e inferior
+            if (currentIdx === questions.length - 1) {
+                document.getElementById("top-btn-finish").disabled = false;
+                document.getElementById("btn-finish").disabled = false;
+            } else {
+                document.getElementById("top-btn-next").disabled = false;
+                document.getElementById("btn-next").disabled = false;
+            }
+        }
+
+        function nextQuestion() {
+            currentIdx++;
+            loadQuestion();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function finishExam() {
+            clearInterval(timerInterval);
+            document.getElementById("exam-screen").classList.add("hidden");
+            document.getElementById("results-screen").classList.remove("hidden");
+
+            document.getElementById("res-student-info").textContent = `${studentName} | ${studentCareer}`;
+            
+            const finalScore = (score / questions.length) * 10;
+            document.getElementById("res-score-val").textContent = finalScore.toFixed(1);
+
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const mins = Math.floor(elapsed / 60);
+            const secs = elapsed % 60;
+            document.getElementById("res-time-summary").textContent = `Tiempo total empleado: ${mins} min ${secs} seg`;
+
+            const fbSummary = document.getElementById("res-feedback-summary");
+            if (finalScore >= 8.0) {
+                fbSummary.textContent = "¡Excelente desempeño! Demuestra un sólido dominio clínico y teórico.";
+            } else if (finalScore >= 6.0) {
+                fbSummary.textContent = "Aprobado con observaciones. Se sugiere reforzar los fundamentos clínicos.";
+            } else {
+                fbSummary.textContent = "Calificación no aprobatoria. Es necesario repasar los módulos de estudio.";
+            }
+
+            const breakdownContainer = document.getElementById("module-breakdown");
+            for (const [mod, data] of Object.entries(moduleStats)) {
+                const percentage = data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0;
+                
+                const modItem = document.createElement("div");
+                modItem.className = "module-item";
+                modItem.innerHTML = `
+                    <div class="module-info">
+                        <span>${mod}</span>
+                        <span>${data.correct}/${data.total} (${percentage}%)</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${percentage}%;"></div>
+                    </div>
+                `;
+                breakdownContainer.appendChild(modItem);
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function requestFacultyReset() {
+            const password = prompt("Ingrese la clave docente para reiniciar la evaluación:");
+            if (password === "DOCENTE2026") {
+                alert("Acceso autorizado. Reiniciando evaluación.");
+                location.reload();
+            } else if (password !== null) {
+                alert("Clave docente incorrecta. Acceso denegado.");
+            }
+        }
+    </script>
 </body>
 </html>
