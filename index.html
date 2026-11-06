@@ -36,16 +36,14 @@
         body {
             background-color: var(--bg);
             color: var(--text);
-            line-height: 1.5;
-            padding-bottom: 30px;
-            /* Permite scroll fluido pero previene el rebote elástico en móviles */
-            overscroll-behavior-y: contain;
+            line-height: 1.4;
+            padding-bottom: 20px;
         }
 
         header {
             background: var(--primary);
             color: white;
-            padding: 10px 15px;
+            padding: 8px 12px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -56,35 +54,35 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 4px;
         }
 
         .header-title h1 {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 700;
         }
 
         .header-title p {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             opacity: 0.85;
         }
 
         .header-stats {
             display: flex;
-            gap: 6px;
+            gap: 4px;
             align-items: center;
             flex-wrap: wrap;
         }
 
         .stat-badge {
             background: rgba(255, 255, 255, 0.15);
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.75rem;
+            padding: 3px 6px;
+            border-radius: 10px;
+            font-size: 0.7rem;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 3px;
+            gap: 2px;
         }
 
         .stat-badge.correct-badge { background: rgba(47, 133, 90, 0.4); }
@@ -92,44 +90,43 @@
 
         .container {
             max-width: 900px;
-            margin: 15px auto;
-            padding: 0 10px;
+            margin: 10px auto;
+            padding: 0 8px;
         }
 
         .card {
             background: var(--card);
-            border-radius: 10px;
-            padding: 18px;
+            border-radius: 8px;
+            padding: 12px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             border: 1px solid var(--border);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         #registration-screen {
-            max-width: 450px;
-            margin: 40px auto;
+            max-width: 400px;
+            margin: 30px auto;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .form-group label {
             display: block;
             font-weight: 600;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
             color: var(--primary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .form-group input, .form-group select {
             width: 100%;
-            padding: 10px;
+            padding: 8px;
             border: 1px solid var(--border);
             border-radius: 6px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             outline: none;
-            transition: border-color 0.2s;
             -webkit-user-select: text;
             user-select: text;
         }
@@ -138,9 +135,9 @@
             background: var(--primary);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 6px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
@@ -154,13 +151,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .q-tag {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
-            padding: 3px 6px;
+            padding: 2px 5px;
             border-radius: 4px;
             background: #e2e8f0;
             color: #4a5568;
@@ -170,37 +167,37 @@
         .q-tag.g2 { background: #fefcbf; color: #744210; }
 
         .q-module {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 700;
             color: var(--accent);
             text-transform: uppercase;
         }
 
         .q-text {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             color: #1a202c;
         }
 
         .options-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .option-btn {
             background: #f8fafc;
             border: 1px solid var(--border);
             border-radius: 6px;
-            padding: 10px 14px;
+            padding: 8px 10px;
             text-align: left;
-            font-size: 0.9rem;
+            font-size: 0.82rem;
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
             align-items: flex-start;
-            gap: 8px;
+            gap: 6px;
         }
 
         .option-btn:hover:not(:disabled) { background: #edf2f7; border-color: #cbd5e0; }
@@ -220,10 +217,10 @@
         }
 
         .feedback-box {
-            margin-top: 12px;
-            padding: 12px;
+            margin-top: 8px;
+            padding: 8px 10px;
             border-radius: 6px;
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             display: none;
             animation: fadeIn 0.3s ease-in;
         }
@@ -232,22 +229,35 @@
         .feedback-box.correct-fb { background: var(--success-bg); border-left: 4px solid var(--success); color: #22543d; }
         .feedback-box.incorrect-fb { background: var(--error-bg); border-left: 4px solid var(--error); color: #742a2a; }
 
-        .feedback-title { font-weight: 700; margin-bottom: 3px; display: flex; align-items: center; gap: 5px; }
+        .feedback-title { font-weight: 700; margin-bottom: 2px; display: flex; align-items: center; gap: 4px; }
 
-        .score-summary { text-align: center; padding: 15px 0; }
+        /* BARRA DE NAVEGACIÓN SUPERIOR (Propuesta del Doctor) */
+        .top-nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 10px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        }
+
+        .score-summary { text-align: center; padding: 10px 0; }
         .score-circle {
-            width: 100px; height: 100px; border-radius: 50%;
+            width: 90px; height: 90px; border-radius: 50%;
             background: var(--primary); color: white;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            margin: 0 auto 12px;
+            margin: 0 auto 10px;
         }
-        .score-val { font-size: 1.8rem; font-weight: 800; line-height: 1; }
-        .score-max { font-size: 0.75rem; opacity: 0.8; }
+        .score-val { font-size: 1.6rem; font-weight: 800; line-height: 1; }
+        .score-max { font-size: 0.7rem; opacity: 0.8; }
 
-        .module-breakdown { margin-top: 20px; }
-        .module-item { margin-bottom: 10px; }
-        .module-info { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 3px; font-weight: 600; }
-        .progress-bar { height: 6px; background: #edf2f7; border-radius: 3px; overflow: hidden; }
+        .module-breakdown { margin-top: 15px; }
+        .module-item { margin-bottom: 8px; }
+        .module-info { display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 2px; font-weight: 600; }
+        .progress-bar { height: 5px; background: #edf2f7; border-radius: 3px; overflow: hidden; }
         .progress-fill { height: 100%; background: var(--primary-light); width: 0%; transition: width 0.5s ease-out; }
 
         .hidden { display: none !important; }
@@ -263,8 +273,8 @@
     <!-- Registration Screen -->
     <div id="registration-screen" class="container">
         <div class="card">
-            <h2 style="color: var(--primary); margin-bottom: 6px; text-align: center; font-size: 1.2rem;">Examen de Anatomía y Fisiología</h2>
-            <p style="color: var(--text-muted); font-size: 0.85rem; text-align: center; margin-bottom: 20px;">2.º Parcial — Licenciatura en Enfermería y TSUM</p>
+            <h2 style="color: var(--primary); margin-bottom: 4px; text-align: center; font-size: 1.1rem;">Examen de Anatomía y Fisiología</h2>
+            <p style="color: var(--text-muted); font-size: 0.8rem; text-align: center; margin-bottom: 15px;">2.º Parcial — Licenciatura en Enfermería y TSUM</p>
             
             <form id="reg-form" onsubmit="startExam(event)">
                 <div class="form-group">
@@ -304,6 +314,13 @@
         </header>
 
         <div class="container">
+            <!-- BARRA DE NAVEGACIÓN SUPERIOR (IMPLEMENTADA POR EL DOCTOR) -->
+            <div class="top-nav-bar">
+                <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary);">Navegación de Preguntas</span>
+                <button class="btn" style="width: auto; padding: 6px 14px; font-size: 0.85rem;" onclick="nextQuestion()" id="top-btn-next" disabled>Siguiente ➡️</button>
+                <button class="btn hidden" style="background: var(--success); width: auto; padding: 6px 14px; font-size: 0.85rem;" onclick="finishExam()" id="top-btn-finish" disabled>Finalizar 🏁</button>
+            </div>
+
             <div class="card" id="question-card">
                 <div class="q-header">
                     <span class="q-module" id="q-module">MÓDULO</span>
@@ -318,7 +335,8 @@
                 </div>
             </div>
 
-            <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+            <!-- BOTÓN INFERIOR SECUNDARIO -->
+            <div style="display: flex; justify-content: flex-end; margin-bottom: 15px;">
                 <button class="btn" style="width: auto;" onclick="nextQuestion()" id="btn-next" disabled>Siguiente Pregunta ➡️</button>
                 <button class="btn hidden" style="background: var(--success); width: auto;" onclick="finishExam()" id="btn-finish" disabled>Finalizar Examen 🏁</button>
             </div>
@@ -328,23 +346,23 @@
     <!-- Results Screen -->
     <div id="results-screen" class="container hidden">
         <div class="card">
-            <h2 style="color: var(--primary); text-align: center; margin-bottom: 5px; font-size: 1.2rem;">Resultados de la Evaluación</h2>
-            <p style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px;" id="res-student-info"></p>
+            <h2 style="color: var(--primary); text-align: center; margin-bottom: 4px; font-size: 1.1rem;">Resultados de la Evaluación</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-bottom: 12px;" id="res-student-info"></p>
 
             <div class="score-summary">
                 <div class="score-circle">
                     <div class="score-val" id="res-score-val">0.0</div>
                     <div class="score-max">de 10.0</div>
                 </div>
-                <p id="res-time-summary" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 4px;"></p>
-                <p id="res-feedback-summary" style="font-weight: 600; color: var(--primary); font-size: 0.9rem;"></p>
+                <p id="res-time-summary" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 4px;"></p>
+                <p id="res-feedback-summary" style="font-weight: 600; color: var(--primary); font-size: 0.85rem;"></p>
             </div>
 
             <div class="module-breakdown" id="module-breakdown">
-                <h3 style="font-size: 0.95rem; color: var(--primary); margin-bottom: 10px;">Desglose de Desempeño por Módulo:</h3>
+                <h3 style="font-size: 0.9rem; color: var(--primary); margin-bottom: 8px;">Desglose de Desempeño por Módulo:</h3>
             </div>
 
-            <div style="margin-top: 20px;">
+            <div style="margin-top: 15px;">
                 <button class="btn" style="background: #4a5568;" onclick="requestFacultyReset()">Reinicio Docente (Clave Requerida)</button>
             </div>
         </div>
@@ -463,11 +481,24 @@
             fbBox.className = "feedback-box";
             fbBox.style.display = "none";
 
+            // Control de botones superior e inferior
+            document.getElementById("top-btn-next").disabled = true;
             document.getElementById("btn-next").disabled = true;
+
             if (currentIdx === questions.length - 1) {
+                document.getElementById("top-btn-next").classList.add("hidden");
+                document.getElementById("top-btn-finish").classList.remove("hidden");
+                document.getElementById("top-btn-finish").disabled = true;
+
                 document.getElementById("btn-next").classList.add("hidden");
                 document.getElementById("btn-finish").classList.remove("hidden");
                 document.getElementById("btn-finish").disabled = true;
+            } else {
+                document.getElementById("top-btn-next").classList.remove("hidden");
+                document.getElementById("top-btn-finish").classList.add("hidden");
+
+                document.getElementById("btn-next").classList.remove("hidden");
+                document.getElementById("btn-finish").classList.add("hidden");
             }
         }
 
@@ -504,9 +535,12 @@
             document.getElementById("correct-badge").textContent = `✓ ${score}/${questions.length}`;
             document.getElementById("error-badge").textContent = `✗ ${errors}/${questions.length}`;
 
+            // Habilitar botones superior e inferior
             if (currentIdx === questions.length - 1) {
+                document.getElementById("top-btn-finish").disabled = false;
                 document.getElementById("btn-finish").disabled = false;
             } else {
+                document.getElementById("top-btn-next").disabled = false;
                 document.getElementById("btn-next").disabled = false;
             }
         }
@@ -514,6 +548,7 @@
         function nextQuestion() {
             currentIdx++;
             loadQuestion();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function finishExam() {
@@ -557,6 +592,7 @@
                 `;
                 breakdownContainer.appendChild(modItem);
             }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function requestFacultyReset() {
