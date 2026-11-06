@@ -38,9 +38,8 @@
             color: var(--text);
             line-height: 1.5;
             padding-bottom: 30px;
-            /* EVITA EL REINICIO MÓVIL: Bloquea estrictamente el gesto de tirar hacia abajo */
-            overscroll-behavior-y: none;
-            touch-action: pan-x pan-y;
+            /* Permite scroll fluido pero previene el rebote elástico en móviles */
+            overscroll-behavior-y: contain;
         }
 
         header {
@@ -352,25 +351,6 @@
     </div>
 
     <script>
-        // BLINDAJE TÁCTIL ABSOLUTO: Anula el gesto nativo de recarga al deslizar hacia abajo
-        document.addEventListener('touchmove', function(e) {
-            if (window.pageYOffset <= 0) {
-                // Si está en el tope superior y trata de tirar hacia abajo, se bloquea el evento
-                let target = e.target;
-                let isInsideScrollable = false;
-                while (target !== document.body && target !== null) {
-                    if (target.scrollHeight > target.clientHeight) {
-                        isInsideScrollable = true;
-                        break;
-                    }
-                    target = target.parentElement;
-                }
-                if (!isInsideScrollable) {
-                    e.preventDefault();
-                }
-            }
-        }, { passive: false });
-
         const questions = [
             { id: 1, module: "MÓDULO I: HOMEOSTASIS", tag: "G1", text: "¿Cómo se define formalmente el concepto fisiológico de homeostasis en el organismo humano?", options: ["A) La capacidad del cuerpo para mantener un ambiente interno constante y relativamente estable frente al entorno.", "B) El estado patológico irreversible de descompensación orgánica y fallo multiorgánico.", "C) El proceso exclusivo de división celular acelerada en tejidos en constante crecimiento.", "D) La eliminación total de los productos de desecho metabólico mediante el sistema linfático."], correct: 0, fb: "La homeostasis representa el conjunto de procesos fisiológicos autorreguladores mediante los cuales los sistemas biológicos mantienen estables las condiciones internas frente a fluctuaciones ambientales." },
             { id: 2, module: "MÓDULO I: HOMEOSTASIS", tag: "G1", text: "Los mecanismos de retroalimentación negativa son los principales responsables de estabilizar los sistemas fisiológicos al oponerse o revertir el estímulo inicial que alteró la variable regulada.", options: ["A) Verdadero.", "B) Falso."], correct: 0, fb: "La retroalimentación negativa es el principal sistema de control homeostático. Detecta una desviación de un parámetro y desencadena respuestas efectoras que contrarrestan el cambio." },
